@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'triviamaster.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'triva_backend',
+        'NAME': 'trivia_backend',
     }
 }
 
