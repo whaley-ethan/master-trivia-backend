@@ -1,4 +1,7 @@
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+
 from users.models import CustomUser
 
 # Create your models here.
@@ -43,3 +46,17 @@ class Answer(models.Model):
     difficulty = models.CharField(choices=DIFF_CHOICES, max_length=6)
     time = models.IntegerField()
     didGetRight = models.BooleanField()
+
+@receiver(pre_save, sender=Answer)
+def validate_category(sender, instance, **kwargs):
+    valid_types = [cat[0] for cat in sender.CATEGORY_CHOICES]
+    if instance.category not in valid_types:
+        from django.core.exceptions import ValidationError
+        raise ValidationError(f'Category "{instance.category}" is not a valid category')
+
+@receiver(pre_save, sender=Answer)
+def validate_difficulty(sender, instance, **kwargs):
+    valid_types = [diff[0] for diff in sender.DIFF_CHOICES]
+    if instance.difficulty not in valid_types:
+        from django.core.exceptions import ValidationError
+        raise ValidationError(f'Difficulty "{instance.difficulty}" is not a valid difficulty')
