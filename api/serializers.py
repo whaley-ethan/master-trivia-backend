@@ -7,6 +7,8 @@ class AnswerSerializer(serializers.ModelSerializer):
         fields = ('quiz', 'category', 'difficulty', 'didGetRight', 'time')
 
 class QuizSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user.username')
+    answers = serializers.StringRelatedField(many=True, read_only=True)
     class Meta:
         model = Quiz
         fields = ('id', 'user', 'answers')

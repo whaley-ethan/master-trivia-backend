@@ -47,6 +47,15 @@ class Answer(models.Model):
     time = models.IntegerField()
     didGetRight = models.BooleanField()
 
+    def __str__(self):
+        questionRight = 'wrong'
+        if self.didGetRight:
+            questionRight = 'right'
+
+        return f'{questionRight} {self.difficulty} {self.category} {self.time}'
+
+
+
 @receiver(pre_save, sender=Answer)
 def validate_category(sender, instance, **kwargs):
     valid_types = [cat[0] for cat in sender.CATEGORY_CHOICES]
