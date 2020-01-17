@@ -33,5 +33,6 @@ With the server running the following api routes are available:
 /api/users/
 
 /api/quiz/
+/api/quiz/<quiz_id>/
 
 /api/answer/

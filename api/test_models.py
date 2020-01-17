@@ -32,8 +32,14 @@ class AnswerModelTests(TestCase):
         self.user.save()
         self.quiz = Quiz(user=self.user)
         self.quiz.save()
+        self.goodAnswer = Answer(quiz=self.quiz, category="General Knowledge", difficulty = "easy", time = 5000, didGetRight = True)
+        self.goodAnswer.save()
         self.answerBadCategory = Answer(quiz=self.quiz, category="Code Without Tests", difficulty = "easy", time = 5000, didGetRight = True)
         self.answerBadDifficulty = Answer(quiz=self.quiz, category="General Knowledge", difficulty = "extra hard", time = 5000, didGetRight = True)
+
+    def test_model_relationships(self):
+        self.assertEqual(self.user.quizes.all()[0], self.quiz)
+        self.assertEqual(self.quiz.answers.all()[0], self.goodAnswer)
 
     def test_new_answer_with_bad_category(self):
         with self.assertRaises(ValidationError):
