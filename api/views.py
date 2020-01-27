@@ -17,3 +17,4 @@ class QuizListCreate(generics.ListCreateAPIView):
 class QuizDetail(generics.ListCreateAPIView):
     queryset = Quiz.objects.all()
     serializer_class = QuizSerializer
+    

@@ -25,10 +25,14 @@ class UserAPITests(TestCase):
         # httpCode 400 -> "Bad Request"
         self.assertEqual(response.status_code, 400)
 
-    def test_login_and_logout(self):
-        pass
-
     def test_relationship_display(self):
         response = self.client.post(
             "/api/rest-auth/login/", {"username": "JonDoe", "email": "jon@doe.com", "password": "testpassword1"})
         user_id = response.json()
+        
+    def test_get_all_user_statistics(self):
+        response = self.client.get("/api/user/all/statistics/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_login_and_logout(self):
+        pass

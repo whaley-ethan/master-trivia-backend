@@ -12,4 +12,4 @@ class QuizSerializer(serializers.ModelSerializer):
     answers = serializers.StringRelatedField(many=True, read_only=True)
     class Meta:
         model = Quiz
-        fields = ('id', 'user', 'user_id', 'answers', )
+        fields = ('id', 'user', 'user_id', 'answers', ) 
