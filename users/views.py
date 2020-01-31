@@ -15,7 +15,7 @@ class UserStatisticsListView(generics.ListAPIView):
     queryset = models.CustomUser.objects.all()
     serializer_class = serializers.UserStaticsicsSerializer
 
-class UserStatisticsDetailView(generics.ListAPIView):
+class UserStatisticsDetailView(generics.RetrieveAPIView):
     queryset = models.CustomUser.objects.all()
     serializer_class = serializers.UserStaticsicsSerializer
 
